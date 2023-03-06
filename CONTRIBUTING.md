@@ -1,5 +1,3 @@
-=== CONTRIBUTING.md ===
-
 # Repository Contributions, Participation, and Public Access
 
 **Who may Contribute?** Contributors to [this repository](https://github.com/oasis-tcs/ubl-codelists/) must be [Members](https://www.oasis-open.org/policies-guidelines/oasis-defined-terms-2017-05-26#dMember) of the [UBL TC](https://www.oasis-open.org/committees/ubl/) for any substantive contributions. Anyone wishing to [participate](https://www.oasis-open.org/org/faq#committee-participation) in the TC's technical activity is invited to [join](https://www.oasis-open.org/committees/join) as a TC Member.
