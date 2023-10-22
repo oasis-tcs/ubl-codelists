@@ -13,7 +13,7 @@
    (the "License"); you may not use this file except in compliance with
    the License.  You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+       https://www.apache.org/licenses/LICENSE-2.0
 
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
@@ -318,7 +318,7 @@
     <table width="100%">
     <tr>
         <td align="left"></td>
-        <td align="right">Designed for use with <a href='http://www.junit.org'>JUnit</a> and <a href='http://ant.apache.org/ant'>Ant</a>.</td>
+        <td align="right">Designed for use with <a href='https://www.junit.org'>JUnit</a> and <a href='https://ant.apache.org/ant'>Ant</a>.</td>
     </tr>
     </table>
     <hr size="1"/>
@@ -470,13 +470,13 @@
 <xsl:template name="br-replace">
     <xsl:param name="word"/>
     <xsl:param name="splitlimit">32</xsl:param>
-    <xsl:variable name="secondhalflen" select="(string-length($word)+(string-length($word) mod 2)) div 2"/>
-    <xsl:variable name="secondhalfword" select="substring($word, $secondhalflen)"/>
+    <xsl:variable name="secondhalfstartindex" select="(string-length($word)+(string-length($word) mod 2)) div 2"/>
+    <xsl:variable name="secondhalfword" select="substring($word, $secondhalfstartindex)"/>
     <!-- When word is very big, a recursive replace is very heap/stack expensive, so subdivide on line break after middle of string -->
     <xsl:choose>
       <xsl:when test="(string-length($word) > $splitlimit) and (contains($secondhalfword, '&#xa;'))">
         <xsl:variable name="secondhalfend" select="substring-after($secondhalfword, '&#xa;')"/>
-        <xsl:variable name="firsthalflen" select="string-length($word) - $secondhalflen"/>
+        <xsl:variable name="firsthalflen" select="string-length($word) - string-length($secondhalfword)"/>
         <xsl:variable name="firsthalfword" select="substring($word, 1, $firsthalflen)"/>
         <xsl:variable name="firsthalfend" select="substring-before($secondhalfword, '&#xa;')"/>
         <xsl:call-template name="br-replace">
