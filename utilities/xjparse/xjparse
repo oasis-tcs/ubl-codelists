@@ -1,0 +1,6 @@
+thisdir=`dirname $0`
+java -jar "$thisdir/xjparse.jar" -c "$thisdir/catalogBSD.xml" $@ >~/t/work/xjparse.err
+ret=$?
+if [[ "ret" = 0 ]]; then echo 1>&2 No Validation errors; exit 0 ; fi
+cat 1>&2 ~/t/work/xjparse.err
+exit $ret

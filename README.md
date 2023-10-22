@@ -8,6 +8,7 @@ OASIS TC GitHub repositories, as described in [GitHub Repositories for OASIS TC 
 
 Members of the OASIS Universal Business Language (UBL) TC use this TC GitHub repository as part of the TC's chartered work in the development of the UBL Standard. The UBL distribution includes a suite of example code lists, obtained from international sources maintained by code list custodians. This repository is used periodically to harvest the external sources of code lists and transform their content into the OASIS Standard genericode format for use in the UBL distribution. The resulting files are dropped into the UBL repository for use in creating the UBL distribution.
 
+The initial version of this repository is recreated from working code 2020-04-17 that appears no longer to work properly. But it is recorded in the git repository as a matter of record and new development will be based on this base.
 
 ## Contributions
 

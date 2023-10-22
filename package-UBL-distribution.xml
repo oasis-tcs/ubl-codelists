@@ -1,0 +1,44 @@
+<project default="make" xmlns:if="ant:if" xmlns:unless="ant:unless">
+
+<target name="make">
+  <delete dir="${dir}code-lists-ubl-${UBL}-${stage}-${version}"/>
+  <mkdir dir="${dir}code-lists-ubl-${UBL}-${stage}-${version}"/>
+  <copy todir="${dir}code-lists-ubl-${UBL}-${stage}-${version}">
+    <fileset dir=".">
+      <include name="master-code-list-UBL-${UBL}-${stage}.xml"/>
+    </fileset>
+  </copy>
+  <mkdir dir="${dir}code-lists-ubl-${UBL}-${stage}-${version}/cl"/>
+  <mkdir dir="${dir}code-lists-ubl-${UBL}-${stage}-${version}/cl/gc"/>
+  <mkdir dir="${dir}code-lists-ubl-${UBL}-${stage}-${version}/cl/gc/default"/>
+  <copy todir="${dir}code-lists-ubl-${UBL}-${stage}-${version}/cl/gc/default">
+    <fileset dir="${stage}">
+     <include name="**"/>
+    </fileset>
+  </copy>
+
+  <delete file="${dir}code-lists-ubl-${UBL}-${stage}-${version}.zip"/>
+  <touch datetime="${datetimelocal}" pattern="yyyyMMdd-HHmm">
+    <fileset dir="${dir}code-lists-ubl-${UBL}-${stage}-${version}"/>
+  </touch>
+
+  <zip destfile="${dir}code-lists-ubl-${UBL}-${stage}-${version}.zip"
+       basedir="${dir}" includes="code-lists-ubl-${UBL}-${stage}-${version}/**"/>
+  <delete dir="${dir}code-lists-ubl-${UBL}-${stage}-${version}"/>
+  <unzip src="${dir}code-lists-ubl-${UBL}-${stage}-${version}.zip" 
+         dest="${dir}"/>
+
+  <touch datetime="${datetimelocal}" pattern="yyyyMMdd-HHmm">
+    <fileset dir="${dir}">
+      <include name="code-lists-ubl-${UBL}-${stage}-${version}.zip"/>
+    </fileset>
+  </touch>
+
+  <!--documentation-->
+  <echo message="stage=${stage}"/>
+  <echo message="version=${version}"/>
+  <echo message="datetimelocal=${datetimelocal}"/>
+  
+</target>
+
+</project>
