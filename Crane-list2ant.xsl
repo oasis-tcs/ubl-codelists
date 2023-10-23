@@ -230,8 +230,7 @@ CODE FOR ANY PURPOSE.
 </xs:template>
 <!--<xsl:template match="list[@method='Currency']" priority="10"/>-->
 <xsl:template match="list[@method='Currency']">
-  <get src="{Identification/AlternateFormatLocationUri}"
-       dest="{$intermediate-uri-prefix}{@inuri}"/>
+  <xsl:call-template name="c:composeGetInstructions"/>
   <available file="{$intermediate-uri-prefix}{@inuri}"
              property="{Identification/ShortName}.exists"/>
   <fail unless="{Identification/ShortName}.exists"
@@ -252,8 +251,9 @@ CODE FOR ANY PURPOSE.
 </xs:template>
 <!--<xsl:template match="list[@method='Language']" priority="10"/>-->
 <xsl:template match="list[@method='Language']">
-  <get src="{Identification/AlternateFormatLocationUri}"
-       dest="{$intermediate-uri-prefix}{@inuri}.html"/>
+  <xsl:call-template name="c:composeGetInstructions"/>
+  <move file="{$intermediate-uri-prefix}{@inuri}"
+        tofile="{$intermediate-uri-prefix}{@inuri}.html"/>
   <exec executable="tidy" output="{$intermediate-uri-prefix}{@inuri}"
         error="{$intermediate-uri-prefix}{@inuri}.err.txt">
     <arg value="-asxml"/>
@@ -287,8 +287,7 @@ CODE FOR ANY PURPOSE.
 </xs:template>
 <!--<xsl:template match="list[@method='Mime']" priority="10"/>-->
 <xsl:template match="list[@method='Mime']">
-  <get src="{Identification/AlternateFormatLocationUri}"
-       dest="{$intermediate-uri-prefix}{@inuri}"/>
+  <xsl:call-template name="c:composeGetInstructions"/>
   <available file="{$intermediate-uri-prefix}{@inuri}"
              property="{Identification/ShortName}.exists"/>
   <fail unless="{Identification/ShortName}.exists"
@@ -310,8 +309,9 @@ CODE FOR ANY PURPOSE.
 <!--<xsl:template match="list[@method='Packaging']" priority="10"/>-->
 <xsl:template match="list[@method='Packaging']">
   
-  <get src="{Identification/AlternateFormatLocationUri}"
-       dest="{$intermediate-uri-prefix}{@inuri}.xls"/>
+  <xsl:call-template name="c:composeGetInstructions"/>
+  <move file="{$intermediate-uri-prefix}{@inuri}"
+        tofile="{$intermediate-uri-prefix}{@inuri}.xls"/>
   <exec executable="soffice">
     <arg value="--headless"/>
     <arg value="--convert-to"/>
@@ -350,8 +350,9 @@ CODE FOR ANY PURPOSE.
 <!--<xsl:template match="list[@method='Unit']" priority="10"/>-->
 <xsl:template match="list[@method='Unit']">
   
-  <get src="{Identification/AlternateFormatLocationUri}"
-       dest="{$intermediate-uri-prefix}{@inuri}.xls"/>
+  <xsl:call-template name="c:composeGetInstructions"/>
+  <move file="{$intermediate-uri-prefix}{@inuri}"
+        tofile="{$intermediate-uri-prefix}{@inuri}.xls"/>
   <exec executable="soffice">
     <arg value="--headless"/>
     <arg value="--convert-to"/>
@@ -390,8 +391,7 @@ CODE FOR ANY PURPOSE.
 <!--<xsl:template match="list[@method='XSD']" priority="10"/>-->
 <xsl:template match="list[@method='XSD']">
   
-  <get src="{Identification/AlternateFormatLocationUri}"
-       dest="{$intermediate-uri-prefix}{@inuri}"/>
+  <xsl:call-template name="c:composeGetInstructions"/>
   
   <available file="{$intermediate-uri-prefix}{@inuri}"
              property="{Identification/ShortName}.exists"/>
@@ -415,6 +415,43 @@ CODE FOR ANY PURPOSE.
   <xsl:message terminate="yes">
     <xsl:value-of select="'Unaccommodated list method: ',@method"/>
   </xsl:message>
+</xsl:template>
+
+<xs:template>
+  <para>
+    Compose retrieval instructions since "get" no longer working on the
+    UNCEFACT site for "jar:" method calls.
+  </para>
+  <para>
+    The current node is the matched &lt;list> element.
+  </para>
+</xs:template>
+<xsl:template name="c:composeGetInstructions">
+  <xsl:variable name="list" select="."/>
+  <xsl:variable name="location"
+                select="Identification/AlternateFormatLocationUri"/>
+  <xsl:choose>
+    <xsl:when test="contains($location,'!') and starts-with($location,'jar:')">
+      <!--now need multiple steps ... didn't used to-->
+      <xsl:analyze-string select="$location" regex="jar:(.+?)!(.+)">
+        <xsl:matching-substring>
+          <!--create local file-->
+          <get src="{regex-group(1)}"
+               dest="{$intermediate-uri-prefix}{$list/@inuri}.zip"/>
+          <!--extract the files in the retrieved zip-->
+          <unzip src="{$intermediate-uri-prefix}{$list/@inuri}.zip"
+                 dest="{$intermediate-uri-prefix}{$list/@inuri}.zipdir"/>
+          <!--now fetch fragment from the local file-->
+          <copy file="{$intermediate-uri-prefix}{$list/@inuri}.zipdir{
+                       regex-group(2)}"
+                tofile="{$intermediate-uri-prefix}{$list/@inuri}"/>
+        </xsl:matching-substring>
+      </xsl:analyze-string>
+    </xsl:when>
+    <xsl:otherwise>
+      <get src="{$location}" dest="{$intermediate-uri-prefix}{@inuri}"/>
+    </xsl:otherwise>
+  </xsl:choose>
 </xsl:template>
 
 </xsl:stylesheet>
