@@ -98,6 +98,14 @@ CODE FOR ANY PURPOSE.
 </xs:param>
 <xsl:param name="output-uri-prefix" required="yes" as="xsd:string"/>
 
+<xs:param ignore-ns='yes'>
+  <para>
+    The name of the bundle of output files, incorporating the package,
+    the UBL string, and the label.
+  </para>
+</xs:param>
+<xsl:param name="bundle" required="yes" as="xsd:string"/>
+
 <xs:variable>
   <para>
     The base URI of the input file
@@ -121,10 +129,47 @@ CODE FOR ANY PURPOSE.
   <xsl:result-document indent="yes">
     <project default="make" xmlns:if="ant:if" xmlns:unless="ant:unless">
     
+      <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+      <taskdef resource="net/sf/antcontrib/antlib.xml"/>
+
       <target name="make">
+        <stopwatch name="Overall process" action="start"/>
+        <tstamp>
+          <format property="localTime"
+                  pattern="yyyy-MM-dd HH:mm:ss"/>
+        </tstamp>
+        <property name="thisdir" value="${{user.dir}}"/>
+        <property name="consoleFile"
+                  location="${{thisdir}}/build.console.${{label}}.txt"/>
+        <record name="${{consoleFile}}" action="start"/>
         <delete dir="{$intermediate-uri-prefix}"/>
         <mkdir dir="{$intermediate-uri-prefix}"/>
         <xsl:apply-templates select="/lists/list"/>
+        
+        <mkdir dir="{$bundle}"/>
+        <move todir="{$bundle}">
+          <fileset dir=".">
+            <include name="master-code-list-**"/>
+          </fileset>
+        </move>
+        <mkdir dir="{$bundle}/cl/gc/default"/>
+        <move todir="{$bundle}/cl/gc/default">
+          <fileset dir="{$output-uri-prefix}">
+            <include name="**"/>
+          </fileset>
+        </move>
+        <delete dir="{$output-uri-prefix}"/>
+        <mkdir dir="{$bundle}-archive-only"/>
+        <move todir="{$bundle}-archive-only">
+          <fileset dir=".">
+            <include name="**"/>
+            <exclude name="{$bundle}/**"/>
+            <exclude name="genericode/**"/>
+            <exclude name="utilities/**"/>
+            <exclude name="{$bundle}-archive-only/**"/>
+          </fileset>
+        </move>
+        <stopwatch name="Overall process" action="total"/>
       </target>
     </project>
   </xsl:result-document>
