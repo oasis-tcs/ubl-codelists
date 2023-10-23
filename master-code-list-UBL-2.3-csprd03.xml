@@ -182,7 +182,7 @@
       <CanonicalUri>urn:iso:std:iso:4217</CanonicalUri>
       <CanonicalVersionUri>urn:iso:std:iso:4217:$VERSION</CanonicalVersionUri>
       <LocationUri>http://docs.oasis-open.org/ubl/os-UBL-2.1/cl/gc/default/CurrencyCode-2.1.gc</LocationUri>
-      <AlternateFormatLocationUri MimeType="text/xml">http://www.currency-iso.org/dam/downloads/lists/list_one.xml</AlternateFormatLocationUri>
+      <AlternateFormatLocationUri MimeType="text/xml">https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml</AlternateFormatLocationUri>
       <Agency>
          <LongName xml:lang="en">International Organization for Standardization</LongName>
          <Identifier Identifier="http://www.unece.org/trade/untdid/d18a/tred/tred3055.htm">5</Identifier>
