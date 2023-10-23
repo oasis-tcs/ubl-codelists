@@ -138,7 +138,7 @@ There are five code lists that are snapshot in time, requiring the configuration
 
 Each list has a `reviewuri=""` attribute that offers the maintainer of the configuration/control file a location for their review of the data available, but not necessarily the data itself. This is meant to guide the operator in the setting of actual retrieval values in other attributes and elements. It may be that, over time, the expression of the code list values changes. This will necessitate changing the code to accommodate the new expression.
 
-Each list has a `<Verison>` element that needs to be reviewed carefully by the maintainer and set based on their research done at review time. In a number of fields in the genericode identification metadata, the keyword string `RVERSION` is replaced by the XSLT stylesheet with the version extracted from the source data. Other `<version>` strings need to be hand-edited.
+Each list has a `<Verison>` element that needs to be reviewed carefully by the maintainer and set based on their research done at review time. In a number of fields in the genericode identification metadata, the keyword string `$VERSION` is replaced by the XSLT stylesheet with the version extracted from the source data. Other `<version>` strings need to be hand-edited.
 
 Each list has a reference to the agency's identifier found in this list:
 
