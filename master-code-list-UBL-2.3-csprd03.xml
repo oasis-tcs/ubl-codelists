@@ -1,26 +1,4 @@
 <lists>
-  <!--
-    Master code list for UBL distributions
-    
-    Note 1: Five lists come from one ZIP:
-            http://www.unece.org/cefact/xml_schemas/index
-            - download ZIP to confirm root directory filename for alternate
-              format location - was: D19B.zip!/uncefact/...
-            - repeat for all occurrences of version (9 - search ".zip")
-              and date (5 - search for ddMMMyy as above - first five lists)
-              - note that the XSD version may differ from the ZIP version
-                but that usually isn't determined until the process is run
-                and errors are reported; if you wish, you could check first
-                by downloading the ZIP and checking each of the 5 by doing
-                a "find all" of the string "uncefact/codelist/standard"
-    Note 2: Use the reviewuri= (11) for eyeball check for the latest revision
-            that may necessitate a change to the AlternateFormatLocationUri
-            and possibly even the transformation requirement
-    Note 3: Remember to hand-edit all <Version> elements to update the values
-            (where $VERSION will be replaced by the transformations)
-    Note 4: Update http://www.unece.org/trade/untdid/d18a/tred/tred3055.htm
-            (9 times) if newer version is available by hunt and peck
-  -->
 
 <!--
     These five lists are from one ZIP file
@@ -40,7 +18,7 @@
       <AlternateFormatLocationUri MimeType="text/xml">jar:http://www.unece.org/fileadmin/DAM/uncefact/xml_schemas/D19B.zip!/uncefact/codelist/standard/UNECE_AllowanceChargeReasonCode_D19A.xsd</AlternateFormatLocationUri>
       <Agency>
          <LongName xml:lang="en">United Nations Economic Commission for Europe</LongName>
-         <Identifier Identifier="http://www.unece.org/trade/untdid/d18a/tred/tred3055.htm">6</Identifier>
+         <Identifier Identifier="https://service.unece.org/trade/untdid/d18a/tred/tred3055.htm">6</Identifier>
       </Agency>
    </Identification>
   </list>
@@ -58,7 +36,7 @@
       <AlternateFormatLocationUri MimeType="text/xml">jar:http://www.unece.org/fileadmin/DAM/uncefact/xml_schemas/D19B.zip!/uncefact/codelist/standard/UNECE_CommunicationMeansTypeCode_D19A.xsd</AlternateFormatLocationUri>
       <Agency>
          <LongName xml:lang="en">United Nations Economic Commission for Europe</LongName>
-         <Identifier Identifier="http://www.unece.org/trade/untdid/d18a/tred/tred3055.htm">6</Identifier>
+         <Identifier Identifier="https://service.unece.org/trade/untdid/d18a/tred/tred3055.htm">6</Identifier>
       </Agency>
    </Identification>
   </list>
@@ -77,7 +55,7 @@
       <AlternateFormatLocationUri MimeType="text/xml">jar:http://www.unece.org/fileadmin/DAM/uncefact/xml_schemas/D19B.zip!/uncefact/codelist/standard/UNECE_PaymentMeansCode_D19A.xsd</AlternateFormatLocationUri>
       <Agency>
          <LongName xml:lang="en">United Nations Economic Commission for Europe</LongName>
-         <Identifier Identifier="http://www.unece.org/trade/untdid/d18a/tred/tred3055.htm">6</Identifier>
+         <Identifier Identifier="https://service.unece.org/trade/untdid/d18a/tred/tred3055.htm">6</Identifier>
       </Agency>
    </Identification>
   </list>
@@ -96,7 +74,7 @@
       <AlternateFormatLocationUri MimeType="text/xml">jar:http://www.unece.org/fileadmin/DAM/uncefact/xml_schemas/D19B.zip!/uncefact/codelist/standard/UNECE_TransportEquipmentCategoryCode_D19A.xsd</AlternateFormatLocationUri>
       <Agency>
          <LongName xml:lang="en">United Nations Economic Commission for Europe</LongName>
-         <Identifier Identifier="http://www.unece.org/trade/untdid/d18a/tred/tred3055.htm">6</Identifier>
+         <Identifier Identifier="https://service.unece.org/trade/untdid/d18a/tred/tred3055.htm">6</Identifier>
       </Agency>
    </Identification>
   </list>
@@ -115,7 +93,7 @@
       <AlternateFormatLocationUri MimeType="text/xml">jar:http://www.unece.org/fileadmin/DAM/uncefact/xml_schemas/D19B.zip!/uncefact/codelist/standard/UNECE_TransportModeCode_2.xsd</AlternateFormatLocationUri>
       <Agency>
          <LongName xml:lang="en">United Nations Economic Commission for Europe</LongName>
-         <Identifier Identifier="http://www.unece.org/trade/untdid/d18a/tred/tred3055.htm">6</Identifier>
+         <Identifier Identifier="https://service.unece.org/trade/untdid/d18a/tred/tred3055.htm">6</Identifier>
       </Agency>
    </Identification>
   </list>
@@ -142,7 +120,7 @@
       <AlternateFormatLocationUri MimeType="text/xml">http://www.iana.org/assignments/media-types/media-types.xml</AlternateFormatLocationUri>
       <Agency>
          <LongName xml:lang="en">Internet Assigned Numbers Authority</LongName>
-         <Identifier Identifier="http://www.unece.org/trade/untdid/d18a/tred/tred3055.htm">379</Identifier>
+         <Identifier Identifier="https://service.unece.org/trade/untdid/d18a/tred/tred3055.htm">379</Identifier>
       </Agency>
    </Identification>
   </list>
@@ -166,13 +144,13 @@
       <AlternateFormatLocationUri MimeType="text/html">https://www.iso.org/obp/ui/#search/code/</AlternateFormatLocationUri>
       <Agency>
          <LongName xml:lang="en">International Organization for Standardization</LongName>
-         <Identifier Identifier="http://www.unece.org/trade/untdid/d18a/tred/tred3055.htm">5</Identifier>
+         <Identifier Identifier="https://service.unece.org/trade/untdid/d18a/tred/tred3055.htm">5</Identifier>
       </Agency>
    </Identification>
   </list>
   <list outuri="CurrencyCode-2.3.gc" method="Currency"
         inuri="currency-codes.xml"
-        reviewuri="http://www.currency-iso.org/dam/downloads/lists/list_one.xml">
+        reviewuri="https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml">
         <!--yes, the XML is the review file, not http://www.currency-iso.org -->
    <Identification>
       <ShortName>CurrencyCode</ShortName>
@@ -185,7 +163,7 @@
       <AlternateFormatLocationUri MimeType="text/xml">https://www.six-group.com/dam/download/financial-information/data-center/iso-currrency/lists/list-one.xml</AlternateFormatLocationUri>
       <Agency>
          <LongName xml:lang="en">International Organization for Standardization</LongName>
-         <Identifier Identifier="http://www.unece.org/trade/untdid/d18a/tred/tred3055.htm">5</Identifier>
+         <Identifier Identifier="https://service.unece.org/trade/untdid/d18a/tred/tred3055.htm">5</Identifier>
       </Agency>
    </Identification>
   </list>
@@ -204,7 +182,7 @@
       <AlternateFormatLocationUri MimeType="text/html">http://www.loc.gov/standards/iso639-2/php/code_list.php</AlternateFormatLocationUri>
       <Agency>
          <LongName xml:lang="en">International Organization for Standardization</LongName>
-         <Identifier Identifier="http://www.unece.org/trade/untdid/d18a/tred/tred3055.htm">5</Identifier>
+         <Identifier Identifier="https://service.unece.org/trade/untdid/d18a/tred/tred3055.htm">5</Identifier>
       </Agency>
    </Identification>
   </list>
@@ -226,7 +204,7 @@
       <AlternateFormatLocationUri MimeType="application/vnd.ms-excel">jar:https://www.unece.org/fileadmin/DAM/cefact/recommendations/rec21/rec21.zip!/rec21_Rev9e_2012.xls</AlternateFormatLocationUri>
       <Agency>
          <LongName xml:lang="en">United Nations Economic Commission for Europe</LongName>
-         <Identifier Identifier="http://www.unece.org/trade/untdid/d18a/tred/tred3055.htm">6</Identifier>
+         <Identifier Identifier="https://service.unece.org/trade/untdid/d18a/tred/tred3055.htm">6</Identifier>
       </Agency>
    </Identification>
   </list>
@@ -247,7 +225,7 @@
       <AlternateFormatLocationUri MimeType="application/vnd.ms-excel">jar:https://www.unece.org/fileadmin/DAM/cefact/recommendations/rec20/rec20.zip!/rec20/rec20_Rev13e_2017.xls</AlternateFormatLocationUri>
       <Agency>
          <LongName xml:lang="en">United Nations Economic Commission for Europe</LongName>
-         <Identifier Identifier="http://www.unece.org/trade/untdid/d18a/tred/tred3055.htm">6</Identifier>
+         <Identifier Identifier="https://service.unece.org/trade/untdid/d18a/tred/tred3055.htm">6</Identifier>
       </Agency>
    </Identification>
   </list>
