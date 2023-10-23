@@ -5,7 +5,7 @@ saxon=utilities/saxon9he/saxon9he.jar
 xjparse=utilities/xjparse/xjparse.jar
 
 if [ ! -d $targetdir ]; then mkdir $targetdir ; fi
-cp -r . $targetdir/
+find . -not -name $targetdir -not -name .git\* -maxdepth 1 -exec cp -r {} $targetdir/ \;
 
 pushd $targetdir
 

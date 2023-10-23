@@ -20,7 +20,7 @@ jobs:
     - name: Dependencies
       run: |
         sudo apt update
-        sudo apt install -y libreoffice
+        sudo apt install -y libreoffice tidy 
 
     - name: Build
       run: |
