@@ -1,3 +1,11 @@
+# <span font-size="2em" style="color:red">IMPORTANT NOTICE</span>
+
+At this time the source content for most of these code lists no longer is useable for the creation of genericode files. The XSD enumerations no longer contain the annotation documentation from which columnar content was extracted.
+
+Accordingly, development of this repository has ceased until alternative sources of machine-readable code list content can be found.
+
+-----
+
 # README
 
 Members of the [Universal Business Language Technical Committee](https://www.oasis-open.org/committees/ubl/) create and manage technical content in this TC GitHub repository (https://github.com/oasis-tcs/ubl-codelists/) as part of the TC's chartered work (the program of work and deliverables described in its [charter](https://www.oasis-open.org/committees/ubl/charter.php).
