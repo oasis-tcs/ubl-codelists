@@ -6,8 +6,8 @@ echo Missing target directory, platform, and dateZ arguments
 exit
 fi
 
-export UBLversion=2.3
-export UBLstage=csprd03
+export UBLversion=2.5
+export UBLstage=csd01
 
 export targetdir=$1
 export platform=$2

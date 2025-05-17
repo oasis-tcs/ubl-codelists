@@ -4,6 +4,7 @@
                 xmlns:xs="http://www.CraneSoftwrights.com/ns/xslstyle"
                 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                 xmlns:c="urn:X-Crane"
+                xmlns:if="ant:if" xmlns:unless="ant:unless"
                 exclude-result-prefixes="xs xsd c"
                 version="2.0">
 
@@ -127,10 +128,55 @@ CODE FOR ANY PURPOSE.
 </xs:template>
 <xsl:template match="/">
   <xsl:result-document indent="yes">
-    <project default="make" xmlns:if="ant:if" xmlns:unless="ant:unless">
+    <project default="make"
+             xmlns:if="antlib:org.apache.tools.ant.taskdefs.condition">
     
       <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
       <taskdef resource="net/sf/antcontrib/antlib.xml"/>
+      
+      <macrodef name="download-and-cache">
+        <attribute name="url"/>
+        <attribute name="source"/>
+        <attribute name="target"/>
+        <xsl:comment>
+url="https://unece.org/sites/default/files/2024-09/CII_D23B_0.zip"
+source="/uncefact/codelist/standard/UNECE_AllowanceChargeReasonCode_D23B.xsd"
+target="AllowanceChargeReasonCode-2.5.xsd"
+        </xsl:comment>
+        <sequential>
+          <propertyregex property="filename" input="@{{url}}"
+                         regexp=".*/([^/]+)$" select="\1"/>
+          <property name="cache.dir" value="cache"/>
+          <property name="cache.file"
+                    value="${{cache.dir}}/${{filename}}"/>
+      
+          <!-- Create cache directory if it doesn't exist -->
+          <mkdir dir="${{cache.dir}}"/>
+      
+          <!-- Extract filename from URL (already done above) -->
+          <echo>Filename extracted from URL: ${filename}</echo>
+      
+          <!-- Download file only if not already cached -->
+          <available file="${{cache.file}}" property="cached"/>
+          <if>
+            <isset property="cached"/>
+            <then>
+              <echo>Already downloaded ${cache.file}</echo>
+            </then>
+            <else>
+              <echo>Downloading ${url} to ${cache.file} ...</echo>
+              <get src="@{{url}}" dest="${{cache.file}}"
+                   useragent="Mozilla/5.0" verbose="true"/>
+            </else>
+          </if>
+      
+          <!--extract the files in the retrieved zip-->
+          <copy  file="${{cache.file}}" tofile="@{{target}}.zip"/>
+          <unzip src="@{{target}}.zip" dest="@{{target}}.zipdir"/>
+          <!--now fetch fragment from the local file-->
+          <copy file="@{{target}}.zipdir${{source}}" tofile="@{{target}}"/>
+        </sequential>
+      </macrodef>
 
       <target name="make">
         <stopwatch name="Overall process" action="start"/>
@@ -480,21 +526,14 @@ CODE FOR ANY PURPOSE.
       <!--now need multiple steps ... didn't used to-->
       <xsl:analyze-string select="$location" regex="jar:(.+?)!(.+)">
         <xsl:matching-substring>
-          <!--create local file-->
-          <get src="{regex-group(1)}"
-               dest="{$intermediate-uri-prefix}{$list/@inuri}.zip"/>
-          <!--extract the files in the retrieved zip-->
-          <unzip src="{$intermediate-uri-prefix}{$list/@inuri}.zip"
-                 dest="{$intermediate-uri-prefix}{$list/@inuri}.zipdir"/>
-          <!--now fetch fragment from the local file-->
-          <copy file="{$intermediate-uri-prefix}{$list/@inuri}.zipdir{
-                       regex-group(2)}"
-                tofile="{$intermediate-uri-prefix}{$list/@inuri}"/>
+          <download-and-cache url="{regex-group(1)}" source="{regex-group(2)}"
+                       target="{$intermediate-uri-prefix}{$list/@inuri}"/>
         </xsl:matching-substring>
       </xsl:analyze-string>
     </xsl:when>
     <xsl:otherwise>
-      <get src="{$location}" dest="{$intermediate-uri-prefix}{@inuri}"/>
+      <get src="{$location}" dest="{$intermediate-uri-prefix}{@inuri}"
+           useragent="Mozilla/5.0" verbose="true"/>
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
